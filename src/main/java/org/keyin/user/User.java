@@ -5,4 +5,15 @@ package org.keyin.user;
 //
 // *//
 public class User {
+
+    // Attributes
+
+    public String username;
+    public String password;
+    public String email;
+    public int phoneNumber;
+    public String address;
+    public String role;
+
+    // Constructors
 }
