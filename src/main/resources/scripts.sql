@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS gymClasses (
 
 CREATE TABLE IF NOT EXISTS classEnrollments (
                     enrollmentId SERIAL PRIMARY KEY,
-                    studentId INTEGER NOT NULL,
-                    CONSTRAINT studentFkey FOREIGN KEY (studentId)
+                    memberId INTEGER NOT NULL,
+                    CONSTRAINT studentFkey FOREIGN KEY (memberId)
                         REFERENCES public.users(userID)
                         ON UPDATE NO ACTION
                         ON DELETE CASCADE,
