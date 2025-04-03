@@ -3,10 +3,10 @@ package org.keyin.user.childclasses;
 import org.keyin.user.User;
 
 public class Member extends User {
-  
+
     // Constructor
 
-    public Member(String username, String password, String email, int phoneNumber, String address) {
-        super(username, password, email, phoneNumber, address, "Member");
+    public Member(String userName, String userPassword, String userEmail, String userPhoneNumber, String userAddress, String userEmergencyContactName, String userEmergencyContactPhoneNumber) {
+        super(userName, userPassword, userEmail, userPhoneNumber, userAddress, "Member", userEmergencyContactName, userEmergencyContactPhoneNumber);
     }
 }
