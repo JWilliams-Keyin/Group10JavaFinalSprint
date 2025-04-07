@@ -7,18 +7,19 @@ public class WorkoutClass {
     private String gymClassType;
     private String gymClassDescription;
     private int trainerId;
-    
+    private int gymClassCost;
+
     // Constructors
-    
-    public WorkoutClass(String gymClassType, String gymClassDescription, int trainerId) {
+
+    public WorkoutClass(String gymClassType, String gymClassDescription, int trainerId, int gymClassCost) {
         this.gymClassType = gymClassType;
         this.gymClassDescription = gymClassDescription;
         this.trainerId = trainerId;
+        this.gymClassCost = 20;
     }
-    
+
     // Getters & Setters
-
-
+    
     public String getGymClassType() {
         return gymClassType;
     }
@@ -29,6 +30,10 @@ public class WorkoutClass {
 
     public int getTrainerId() {
         return trainerId;
+    }
+
+    public int getGymClassCost() {
+        return gymClassCost;
     }
 
     public void setGymClassType(String gymClassType) {
@@ -42,13 +47,18 @@ public class WorkoutClass {
     public void setTrainerId(int trainerId) {
         this.trainerId = trainerId;
     }
-    
+
+    public void setGymClassCost(int gymClassCost) {
+        this.gymClassCost = gymClassCost;
+    }
+
     // Methods
-    
+
     @Override
     public String toString() {
-        return "Class Type: " + gymClassType + 
+        return "Class Type: " + gymClassType +
                 ", Class Description: " + gymClassDescription +
-                ", Trainer ID: " + trainerId;
+                ", Trainer ID: " + trainerId + 
+                ", Class Price: $" + gymClassCost;
     }
 }
