@@ -1,7 +1,6 @@
 package org.keyin.user;
 
 import org.keyin.database.DatabaseConnection;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 
@@ -112,7 +111,7 @@ public class UserDao {
 
     public void updateUserPassword(int id, String newPassword) {
         String sql = "UPDATE users\n" +
-                "\tSET userPassword = '" + BCrypt.hashpw(newPassword, BCrypt.gensalt(10)) + "'\n" +
+                "\tSET userPassword = '" + newPassword + "'\n" +
                 "\tWHERE userId = '" + id + "';";
 
         try(Connection conn = DatabaseConnection.getConnection()) {
