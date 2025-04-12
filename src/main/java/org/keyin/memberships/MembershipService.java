@@ -1,13 +1,51 @@
 package org.keyin.memberships;
 
+import java.sql.SQLException;
+import java.util.List;
 
-// Service class for membership handle all the business logic
-// and only uses the DAO to interact with the database it does not have methods to do so
-// you can inject in your dao to use in your service. An example will be in the code
 public class MembershipService {
 
-    // When you inject in the DAO you have access to all methods in it
-    //MembershipDAO dao = new MembershipDAO();
+    private MembershipDAO membershipDAO = new MembershipDAO();
 
+    public boolean addMembership(Membership membership) {
+        if (membership.getMembershipDescription() == null || membership.getMembershipDescription().isEmpty()) {
+            System.out.println("❌ Description cannot be empty.");
+            return false;
+        }
 
+        if (membership.getMembershipCost() < 0) {
+            System.out.println("❌ Cost cannot be negative.");
+            return false;
+        }
+
+        membershipDAO.addMembership(membership);
+        return true;
+    }
+
+    public Membership getMembershipById(int id) {
+        return membershipDAO.getMembershipById(id);
+    }
+
+    public List<Membership> getAllMemberships() {
+        return membershipDAO.getAllMemberships();
+    }
+
+    public boolean updateMembership(Membership membership) {
+        if (membership.getMembershipDescription() == null || membership.getMembershipDescription().isEmpty()) {
+            System.out.println("❌ Description cannot be empty.");
+            return false;
+        }
+
+        if (membership.getMembershipCost() < 0) {
+            System.out.println("❌ Cost cannot be negative.");
+            return false;
+        }
+
+        membershipDAO.updateMembership(membership);
+        return true;
+    }
+
+    public void deleteMembership(int membershipID) {
+        membershipDAO.deleteMembership(membershipID);
+    }
 }
