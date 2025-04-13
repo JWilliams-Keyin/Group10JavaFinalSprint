@@ -1,6 +1,8 @@
 package org.keyin.user;
 
-/* The UserService class is a middleware class used to let the app
+/* Author: Jack Williams
+*  Date: April 7th, 2025
+*  Description: The UserService class is a middleware class used to let the app
 *  communicate with the DAO. This class includes middleware for
 *  all the CRUD operations */
 
