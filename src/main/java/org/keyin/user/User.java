@@ -11,6 +11,7 @@ public class User {
 
     // Attributes
 
+    public int userId;
     public String userName;
     public String userPassword;
     public String userEmail;
@@ -22,7 +23,8 @@ public class User {
 
     // Constructors
 
-    public User(String username, String password, String email, String phoneNumber, String address, String role, String emergencyContactName, String emergencyContactPhoneNumber) {
+    public User(int userId, String username, String password, String email, String phoneNumber, String address, String role, String emergencyContactName, String emergencyContactPhoneNumber) {
+        this.UserId = userId;
         this.userName = username;
         this.userPassword = BCrypt.hashpw(password, String.valueOf(10));
         this.userEmail = email;
@@ -35,7 +37,10 @@ public class User {
 
     // Getters & Setters
 
-
+    public int getUserId() {
+        return userId;
+    }
+    
     public String getUserName() {
         return userName;
     }
@@ -66,6 +71,10 @@ public class User {
 
     public String getUserEmergencyContactPhoneNumber() {
         return userEmergencyContactPhoneNumber;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public void setUserName(String userName) {
