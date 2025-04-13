@@ -1,6 +1,8 @@
 package org.keyin.user;
 
-/* The UserDao class communicates with the database to perform SQL queries.
+/* Author: Jack Williams
+*  Date: April 7th
+*  The UserDao class communicates with the database to perform SQL queries.
 *  This file includes all CRUD operations for the user */
 
 import org.keyin.database.DatabaseConnection;
