@@ -10,85 +10,107 @@ public class User {
 
     // Attributes
 
-    public String username;
-    public String password;
-    public String email;
-    public int phoneNumber;
-    public String address;
-    public String role;
+    public String userName;
+    public String userPassword;
+    public String userEmail;
+    public String userPhoneNumber;
+    public String userAddress;
+    public String userRole;
+    public String userEmergencyContactName;
+    public String userEmergencyContactPhoneNumber;
 
     // Constructors
 
-    public User(String username, String password, String email, int phoneNumber, String address, String role) {
-        this.username = username;
-        this.password = BCrypt.hashpw(password, String.valueOf(10));
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.role = role;
+    public User(String username, String password, String email, String phoneNumber, String address, String role, String emergencyContactName, String emergencyContactPhoneNumber) {
+        this.userName = username;
+        this.userPassword = BCrypt.hashpw(password, String.valueOf(10));
+        this.userEmail = email;
+        this.userPhoneNumber = phoneNumber;
+        this.userAddress = address;
+        this.userRole = role;
+        this.userEmergencyContactName = emergencyContactName;
+        this.userEmergencyContactPhoneNumber = emergencyContactPhoneNumber;
     }
 
     // Getters & Setters
 
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public int getPhoneNumber() {
-        return phoneNumber;
+    public String getUserPhoneNumber() {
+        return userPhoneNumber;
     }
 
-    public String getAddress() {
-        return address;
+    public String getUserAddress() {
+        return userAddress;
     }
 
-    public String getRole() {
-        return role;
+    public String getUserRole() {
+        return userRole;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getUserEmergencyContactName() {
+        return userEmergencyContactName;
     }
 
-    public void setPassword(String password) {
-        this.password = BCrypt.hashpw(password, String.valueOf(10));
+    public String getUserEmergencyContactPhoneNumber() {
+        return userEmergencyContactPhoneNumber;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = BCrypt.hashpw(userPassword, String.valueOf(10));
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUserPhoneNumber(String userPhoneNumber) {
+        this.userPhoneNumber = userPhoneNumber;
     }
-    
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
+    public void setUserEmergencyContactName(String userEmergencyContactName) {
+        this.userEmergencyContactName = userEmergencyContactName;
+    }
+
+    public void setUserEmergencyContactPhoneNumber(String userEmergencyContactPhoneNumber) {
+        this.userEmergencyContactPhoneNumber = userEmergencyContactPhoneNumber;
+    }
+
     // Methods
-    
+
     @Override
     public String toString() {
-        return 
-                username + 
-                ", Password: " + password + 
-                ", Email: " + email + 
-                ", Phone Number: " + phoneNumber + 
-                ", Address: " + address + 
-                ", Role: " + role;
+        return
+                "User: " + userName +
+                        ", Password: " + userPassword +
+                        ", Email: " + userEmail +
+                        ", Phone Number: " + userPhoneNumber +
+                        ", Address: " + userAddress +
+                        ", Role: " + userRole +
+                        ", Emergency Contact Name: " + userEmergencyContactName +
+                        ", Emergency Contact Phone Number: " + userEmergencyContactPhoneNumber;
     }
 }
