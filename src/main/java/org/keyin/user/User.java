@@ -2,10 +2,11 @@ package org.keyin.user;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-//*
-// This is the parent class for all users, There are 3 types of users: Trainer, Member, and Admin
-//
-// *//
+/* Author: Jack Williams
+*  Dates: April 2nd - April 3rd, 2025
+*  Description: The User class is the parent class for all kinds of users.
+*  There are three kinds of users: Member, Trainer, and Admin */
+
 public class User {
 
     // Attributes
