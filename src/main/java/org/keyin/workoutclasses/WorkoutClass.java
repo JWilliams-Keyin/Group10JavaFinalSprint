@@ -1,5 +1,10 @@
 package org.keyin.workoutclasses;
 
+/* Author: Jack Williams
+*  Dates: April 4th - April 6th, 2025
+*  Description: The WorkoutClass class is the class that sets gymClasses.
+*  gymClasses include a type, description, trainerId, and cost
+*/
 public class WorkoutClass {
 
     // Attributes
