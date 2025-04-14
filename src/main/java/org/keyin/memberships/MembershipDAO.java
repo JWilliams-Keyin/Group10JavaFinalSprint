@@ -41,7 +41,6 @@ public class MembershipDAO {
                         rs.getInt("membership_id"),
                         MembershipType.valueOf(rs.getString("membership_type")),
                         rs.getString("membership_description"),
-                        rs.getDouble("membership_cost"),
                         rs.getInt("member_id")
                 );
             }
@@ -66,7 +65,6 @@ public class MembershipDAO {
                         rs.getInt("membership_id"),
                         MembershipType.valueOf(rs.getString("membership_type")),
                         rs.getString("membership_description"),
-                        rs.getDouble("membership_cost"),
                         rs.getInt("member_id")
                 );
                 memberships.add(membership);

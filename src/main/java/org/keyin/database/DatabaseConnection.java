@@ -11,7 +11,7 @@ public class DatabaseConnection {
     private static final String USER = "gym_admin";
     private static final String PASSWORD = "password123";
 
-    public static Connection getConnection() throws SQLException, SQLException {
+    public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
@@ -24,4 +24,3 @@ public class DatabaseConnection {
         }
     }
 }
-public void

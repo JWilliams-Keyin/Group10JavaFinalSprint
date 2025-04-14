@@ -2,14 +2,16 @@ package org.keyin.user;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-//*
-// This is the parent class for all users, There are 3 types of users: Trainer, Member, and Admin
-//
-// *//
+/* Author: Jack Williams
+ *  Dates: April 2nd - April 3rd, 2025
+ *  Description: The User class is the parent class for all kinds of users.
+ *  There are three kinds of users: Member, Trainer, and Admin */
+
 public class User {
 
     // Attributes
 
+    public int userId;
     public String userName;
     public String userPassword;
     public String userEmail;
@@ -21,9 +23,10 @@ public class User {
 
     // Constructors
 
-    public User(String username, String password, String email, String phoneNumber, String address, String role, String emergencyContactName, String emergencyContactPhoneNumber) {
+    public User(int userId, String username, String password, String email, String phoneNumber, String address, String role, String emergencyContactName, String emergencyContactPhoneNumber) {
+        this.userId = userId;
         this.userName = username;
-        this.userPassword = BCrypt.hashpw(password, String.valueOf(10));
+        this.userPassword = BCrypt.hashpw(password, BCrypt.gensalt(10));
         this.userEmail = email;
         this.userPhoneNumber = phoneNumber;
         this.userAddress = address;
@@ -34,6 +37,9 @@ public class User {
 
     // Getters & Setters
 
+    public int getUserId() {
+        return userId;
+    }
 
     public String getUserName() {
         return userName;
@@ -67,12 +73,16 @@ public class User {
         return userEmergencyContactPhoneNumber;
     }
 
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
     public void setUserPassword(String userPassword) {
-        this.userPassword = BCrypt.hashpw(userPassword, String.valueOf(10));
+        this.userPassword = BCrypt.hashpw(userPassword, BCrypt.gensalt(10));
     }
 
     public void setUserEmail(String userEmail) {

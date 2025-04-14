@@ -1,6 +1,8 @@
 package org.keyin.user;
 
-/* The UserService class is a middleware class used to let the app
+/* Author: Jack Williams
+ *  Date: April 7th, 2025
+ *  Description: The UserService class is a middleware class used to let the app
  *  communicate with the DAO. This class includes middleware for
  *  all the CRUD operations */
 
@@ -34,14 +36,14 @@ public class UserService {
 
     // Get User by Username
 
-    public boolean getUserByUserName(String username) throws SQLException {
+    public User getUserByUserName(String username) throws SQLException {
         if(username.equals(null)){
             System.out.println("Please input a username");
-            return false;
+            return null;
         }
 
-        userDao.getUserByUsername(username);
-        return true;
+        return userDao.getUserByUsername(username);
+
     }
 
     // Get All Users

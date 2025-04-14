@@ -1,6 +1,8 @@
 package org.keyin.user;
 
-/* The UserDao class communicates with the database to perform SQL queries.
+/* Author: Jack Williams
+ *  Date: April 7th, 2025
+ *  Description: The UserDao class communicates with the database to perform SQL queries.
  *  This file includes all CRUD operations for the user */
 
 import org.keyin.database.DatabaseConnection;
@@ -44,6 +46,7 @@ public class UserDao {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     return new User(
+                            rs.getInt("userId"),
                             rs.getString("userName"),
                             rs.getString("userPassword"),
                             rs.getString("userEmail"),
