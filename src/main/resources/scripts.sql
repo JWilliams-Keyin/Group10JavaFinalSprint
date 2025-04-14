@@ -50,5 +50,5 @@ CREATE TABLE IF NOT EXISTS classEnrollments (
                         ON UPDATE NO ACTION
                         ON DELETE CASCADE,
                     enrollmentDate DATE DEFAULT CURRENT_DATE,
-                    CONSTRAINT uniqueEnrollment UNIQUE (studentId, gymClassId)
+                    CONSTRAINT uniqueEnrollment UNIQUE (memberId, gymClassId)
 );

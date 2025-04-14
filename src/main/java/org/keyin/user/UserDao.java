@@ -15,8 +15,10 @@ public class UserDao {
 
     public void createNewUser(User user) {
         String sql = """
-                INSERT INTO public.users(username, email, password, role, sector)
-                \tVALUES (?, ?, ?, ?, ?, ?, ?, ?);""";
+                INSERT INTO public.users(userName, userPassword, userEmail, userPhoneNum,
+                                         userAddress, userEmergencyContactName,\s
+                                         userEmergencyContactPhoneNum, userRole)
+                                         VALUES (?, ?, ?, ?, ?, ?, ?, ?);""";
 
         try(Connection conn = DatabaseConnection.getConnection()){
             PreparedStatement psmt = conn.prepareStatement(sql);

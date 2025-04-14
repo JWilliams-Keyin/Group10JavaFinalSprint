@@ -17,7 +17,7 @@ public class UserService {
     // Create New User (With Hashed Password)
 
     public boolean createNewUser(User user){
-        if(user.equals(null)){
+        if(user == null){
             System.out.println("Please input a valid user");
             return false;
         } else if (user.userPassword.length() < 8) {
@@ -37,7 +37,7 @@ public class UserService {
     // Get User by Username
 
     public User getUserByUserName(String username) throws SQLException {
-        if(username.equals(null)){
+        if(username == null){
             System.out.println("Please input a username");
             return null;
         }
@@ -55,7 +55,7 @@ public class UserService {
     // Update a User's Username
 
     public boolean updateUserName(int userId, String newUsername) throws SQLException {
-        if(newUsername.equals(null)){
+        if(newUsername == null){
             System.out.println("Please input a username");
             return false;
         }
@@ -68,7 +68,7 @@ public class UserService {
     // Update a User's Password (hashed)
 
     public boolean updateUserPassword(int userId, String newPassword) throws SQLException {
-        if(newPassword.equals(null)){
+        if(newPassword == null){
             System.out.println("Please input a password");
             return false;
         } else if (newPassword.length() < 8) {
@@ -86,7 +86,7 @@ public class UserService {
     // Update a User's Email
 
     public boolean updateUserEmail(int userId, String newEmail) throws SQLException {
-        if(newEmail.equals(null)){
+        if(newEmail == null){
             System.out.println("Please input an email");
             return false;
         }
@@ -99,7 +99,7 @@ public class UserService {
     // Update a User's Phone Number
 
     public boolean updatePhoneNum(int userId, String newPhoneNum) throws SQLException {
-        if(newPhoneNum.equals(null)){
+        if(newPhoneNum == null){
             System.out.println("Please input a phone number");
             return false;
         }
@@ -112,7 +112,7 @@ public class UserService {
     // Update a User's Address
 
     public boolean updateUserAddress(int userId, String newAddress) throws SQLException {
-        if(newAddress.equals(null)){
+        if(newAddress == null){
             System.out.println("Please input an address");
             return false;
         }
@@ -125,7 +125,7 @@ public class UserService {
     // Update a User's Emergency Contact Name
 
     public boolean updateUserEmergencyContactName(int userId, String newEmergencyName) throws SQLException {
-        if(newEmergencyName.equals(null)){
+        if(newEmergencyName == null){
             System.out.println("Please input a name");
             return false;
         }
@@ -138,7 +138,7 @@ public class UserService {
     // Update a User's Emergency Contact Phone Number
 
     public boolean updateUserEmergencyContactPhoneNum(int userId, String newEmergencyNum) throws SQLException {
-        if(newEmergencyNum.equals(null)){
+        if(newEmergencyNum == null){
             System.out.println("Please input a phone number");
             return false;
         }
@@ -151,7 +151,7 @@ public class UserService {
     // Update a User's Role
 
     public boolean updateUserRole(int userId, String newRole) throws SQLException {
-        if(newRole.equals(null)){
+        if(newRole == null){
             System.out.println("Please input a role");
             return false;
         }

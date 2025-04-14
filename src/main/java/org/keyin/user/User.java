@@ -26,7 +26,7 @@ public class User {
     public User(int userId, String username, String password, String email, String phoneNumber, String address, String role, String emergencyContactName, String emergencyContactPhoneNumber) {
         this.userId = userId;
         this.userName = username;
-        this.userPassword = BCrypt.hashpw(password, BCrypt.gensalt(10));
+        this.userPassword = password;// No hashing here, all done in UserService
         this.userEmail = email;
         this.userPhoneNumber = phoneNumber;
         this.userAddress = address;
@@ -46,7 +46,7 @@ public class User {
     }
 
     public String getUserPassword() {
-        return userPassword;
+        return userPassword; // No Hashing here either
     }
 
     public String getUserEmail() {
@@ -82,7 +82,7 @@ public class User {
     }
 
     public void setUserPassword(String userPassword) {
-        this.userPassword = BCrypt.hashpw(userPassword, BCrypt.gensalt(10));
+        this.userPassword = userPassword;
     }
 
     public void setUserEmail(String userEmail) {
