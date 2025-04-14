@@ -16,9 +16,9 @@ public class UserDao {
     public void createNewUser(User user) {
         String sql = """
                 INSERT INTO public.users(userName, userPassword, userEmail, userPhoneNum,
-                                         userAddress, userEmergencyContactName,\s
+                                         userAddress, userEmergencyContactName,
                                          userEmergencyContactPhoneNum, userRole)
-                                         VALUES (?, ?, ?, ?, ?, ?, ?, ?);""";
+                                         VALUES (?, ?, ?, ?, ?, ?, ?, ?);""";//Updated by Dave to match schema
 
         try(Connection conn = DatabaseConnection.getConnection()){
             PreparedStatement psmt = conn.prepareStatement(sql);
