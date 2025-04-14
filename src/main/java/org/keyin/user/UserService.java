@@ -41,7 +41,8 @@ public class UserService {
             System.out.println("Please input a username");
             return null;
         }
-
+    // Changed the designation of the class from boolean to User object above (line 39), as boolean was
+    // causing an error when called by GymApp which called a String. Check for error propagation?
         return userDao.getUserByUsername(username);
 
     }
