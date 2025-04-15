@@ -164,7 +164,7 @@ public class UserService {
 
     // Delete User by ID
 
-    public void deleteUser(int userId) throws SQLException {
-        userDao.deleteUser(userId);
+    public boolean deleteUser(int userId) throws SQLException {
+        return userDao.deleteUser(userId);
     }
 }

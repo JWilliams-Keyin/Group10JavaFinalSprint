@@ -3,7 +3,7 @@ package org.keyin.workoutclasses;
 /*
 The WorkoutClassService class is a middleware class used to let the app
 communicate with the DAO. This class includes middleware for
-all the CRUD operations related to workout classes
+all the CRUD operations related to workout-classes
 */
 
 import java.sql.SQLException;

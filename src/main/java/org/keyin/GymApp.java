@@ -194,8 +194,7 @@ public class GymApp {
             System.out.println("3. View all memberships");
             System.out.println("4. View total revenue from memberships");
             System.out.println("5. View all workout classes");
-            System.out.println("6. Purchase a membership for yourself");
-            System.out.println("7. Logout");
+            System.out.println("6. Logout");
             System.out.print("Enter your choice: ");
 
             while (!scanner.hasNextInt()) {
@@ -223,8 +222,12 @@ public class GymApp {
                     String confirm = scanner.nextLine();
 
                     if (confirm.equalsIgnoreCase("y")) {
-                        userService.deleteUser(userId);
-                        System.out.println("User deleted successfully!");
+                        boolean deleted = userService.deleteUser(userId);
+                        if (deleted) {
+                            System.out.println("User deleted successfully!");
+                        } else {
+                            System.out.println("User not found! No user with ID " + userId + " exists.");
+                        }
                     } else {
                         System.out.println("User deletion cancelled.");
                     }
@@ -260,16 +263,12 @@ public class GymApp {
                     workoutClassService.displayAllWorkoutClasses();
                     break;
                 case 6:
-                    // Purchase a membership for admin
-                    purchaseMembership(scanner, user, membershipService);
-                    break;
-                case 7:
                     System.out.println("Logging out...");
                     break;
                 default:
                     System.out.println("Invalid choice! Please select a valid option.");
             }
-        } while (choice != 7);
+        } while (choice != 6);
     }
 
     /*
