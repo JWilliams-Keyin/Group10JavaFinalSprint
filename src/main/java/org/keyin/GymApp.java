@@ -582,6 +582,7 @@ public class GymApp {
         MembershipType[] types = MembershipType.values();
         for (int i = 0; i < types.length; i++) {
             System.out.println((i + 1) + ". " + types[i] + " - $" + types[i].getCost());
+            System.out.println("   " + types[i].getDescription());
         }
 
         System.out.print("Select membership type (1-" + types.length + "): ");
@@ -595,14 +596,12 @@ public class GymApp {
 
         MembershipType selectedType = types[typeChoice - 1];
 
-        System.out.print("Enter description for this membership: ");
-        String description = scanner.nextLine();
+        String description = selectedType.getDescription();
 
-        // Generate a random ID for the membership
-        int membershipId = (int) (Math.random() * 10000);
+
 
         Membership membership = new Membership(
-                membershipId,
+                0,
                 selectedType,
                 description,
                 user.getUserId()

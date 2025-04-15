@@ -86,6 +86,7 @@ public class UserDao {
                 String role = rs.getString("userRole");
 
                 System.out.println();
+                System.out.println("UserID: " + user_id);
                 System.out.println("Username: " + username);
                 System.out.println("Password: " + password);
                 System.out.println("Email: " + email);
