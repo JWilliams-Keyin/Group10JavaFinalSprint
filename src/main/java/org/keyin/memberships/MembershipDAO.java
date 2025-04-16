@@ -9,16 +9,16 @@ import java.util.List;
 public class MembershipDAO {
 
     public void addMembership(Membership membership) {
-        String sql = "INSERT INTO memberships (membership_id, membership_type, membership_description, membership_cost, member_id) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO memberships (membershipType, membershipDescription, membershipCost, userId) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, membership.getMembershipID());
-            stmt.setString(2, membership.getMembershipType().name());
-            stmt.setString(3, membership.getMembershipDescription());
-            stmt.setDouble(4, membership.getMembershipCost());
-            stmt.setInt(5, membership.getMemberID());
+            //stmt.setInt(1, membership.getMembershipID());
+            stmt.setString(1, membership.getMembershipType().name());
+            stmt.setString(2, membership.getMembershipDescription());
+            stmt.setDouble(3, membership.getMembershipCost());
+            stmt.setInt(4, membership.getMemberID());
 
             stmt.executeUpdate();
 
@@ -28,7 +28,7 @@ public class MembershipDAO {
     }
 
     public Membership getMembershipById(int id) {
-        String sql = "SELECT * FROM memberships WHERE membership_id = ?";
+        String sql = "SELECT * FROM memberships WHERE membershipId = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -38,11 +38,10 @@ public class MembershipDAO {
 
             if (rs.next()) {
                 return new Membership(
-                        rs.getInt("membership_id"),
-                        MembershipType.valueOf(rs.getString("membership_type")),
-                        rs.getString("membership_description"),
-                        rs.getDouble("membership_cost"),
-                        rs.getInt("member_id")
+                        rs.getInt("membershipId"),
+                        MembershipType.valueOf(rs.getString("membershipType")),
+                        rs.getString("membershipDescription"),
+                        rs.getInt("userId")
                 );
             }
 
@@ -63,11 +62,10 @@ public class MembershipDAO {
 
             while (rs.next()) {
                 Membership membership = new Membership(
-                        rs.getInt("membership_id"),
-                        MembershipType.valueOf(rs.getString("membership_type")),
-                        rs.getString("membership_description"),
-                        rs.getDouble("membership_cost"),
-                        rs.getInt("member_id")
+                        rs.getInt("membershipId"),
+                        MembershipType.valueOf(rs.getString("membershipType")),
+                        rs.getString("membershipDescription"),
+                        rs.getInt("userId")
                 );
                 memberships.add(membership);
             }
@@ -80,7 +78,7 @@ public class MembershipDAO {
     }
 
     public void updateMembership(Membership membership) {
-        String sql = "UPDATE memberships SET membership_type = ?, membership_description = ?, membership_cost = ?, member_id = ? WHERE membership_id = ?";
+        String sql = "UPDATE memberships SET membershipType = ?, membershipDescription = ?, membershipCost = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -88,8 +86,8 @@ public class MembershipDAO {
             stmt.setString(1, membership.getMembershipType().name());
             stmt.setString(2, membership.getMembershipDescription());
             stmt.setDouble(3, membership.getMembershipCost());
-            stmt.setInt(4, membership.getMemberID());
-            stmt.setInt(5, membership.getMembershipID());
+         //   stmt.setInt(4, membership.getMemberID());
+          //  stmt.setInt(5, membership.getMembershipID());
 
             stmt.executeUpdate();
 
@@ -99,7 +97,7 @@ public class MembershipDAO {
     }
 
     public void deleteMembership(int membershipID) {
-        String sql = "DELETE FROM memberships WHERE membership_id = ?";
+        String sql = "DELETE FROM memberships WHERE membershipId = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

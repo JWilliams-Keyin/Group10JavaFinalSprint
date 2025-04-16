@@ -1,9 +1,9 @@
 package org.keyin.user;
 
 /* Author: Jack Williams
-*  Date: April 7th, 2025
-*  Description: The UserDao class communicates with the database to perform SQL queries.
-*  This file includes all CRUD operations for the user */
+ *  Date: April 7th, 2025
+ *  Description: The UserDao class communicates with the database to perform SQL queries.
+ *  This file includes all CRUD operations for the user */
 
 import org.keyin.database.DatabaseConnection;
 
@@ -15,10 +15,12 @@ public class UserDao {
 
     public void createNewUser(User user) {
         String sql = """
-                INSERT INTO public.users(username, email, password, role, sector)
-                \tVALUES (?, ?, ?, ?, ?, ?, ?, ?);""";
+                INSERT INTO public.users(userName, userPassword, userEmail, userPhoneNum,
+                                         userAddress, userEmergencyContactName,
+                                         userEmergencyContactPhoneNum, userRole)
+                                         VALUES (?, ?, ?, ?, ?, ?, ?, ?);""";//Updated by Dave to match schema
 
-        try(Connection conn = DatabaseConnection.getConnection()){
+        try (Connection conn = DatabaseConnection.getConnection()) {
             PreparedStatement psmt = conn.prepareStatement(sql);
             psmt.setString(1, user.getUserName());
             psmt.setString(2, user.getUserPassword());
@@ -46,6 +48,7 @@ public class UserDao {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     return new User(
+                            rs.getInt("userId"),
                             rs.getString("userName"),
                             rs.getString("userPassword"),
                             rs.getString("userEmail"),
@@ -83,6 +86,7 @@ public class UserDao {
                 String role = rs.getString("userRole");
 
                 System.out.println();
+                System.out.println("UserID: " + user_id);
                 System.out.println("Username: " + username);
                 System.out.println("Password: " + password);
                 System.out.println("Email: " + email);
@@ -101,10 +105,10 @@ public class UserDao {
 
     public void updateUserName(int id, String newName) {
         String sql = "UPDATE users\n" +
-                    "\tSET userName = '" + newName + "'\n" +
-                    "\tWHERE userId = '" + id + "';";
+                "\tSET userName = '" + newName + "'\n" +
+                "\tWHERE userId = '" + id + "';";
 
-        try(Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
         } catch (SQLException error) {
@@ -119,7 +123,7 @@ public class UserDao {
                 "\tSET userPassword = '" + newPassword + "'\n" +
                 "\tWHERE userId = '" + id + "';";
 
-        try(Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
         } catch (SQLException error) {
@@ -134,7 +138,7 @@ public class UserDao {
                 "\tSET userEmail = '" + newEmail + "'\n" +
                 "\tWHERE userId = '" + id + "';";
 
-        try(Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
         } catch (SQLException error) {
@@ -149,7 +153,7 @@ public class UserDao {
                 "\tSET userPhoneNum = '" + newPhoneNum + "'\n" +
                 "\tWHERE userId = '" + id + "';";
 
-        try(Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
         } catch (SQLException error) {
@@ -164,7 +168,7 @@ public class UserDao {
                 "\tSET userAddress = '" + newAddress + "'\n" +
                 "\tWHERE userId = '" + id + "';";
 
-        try(Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
         } catch (SQLException error) {
@@ -179,7 +183,7 @@ public class UserDao {
                 "\tSET userEmergencyContactName = '" + newEmergencyName + "'\n" +
                 "\tWHERE userId = '" + id + "';";
 
-        try(Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
         } catch (SQLException error) {
@@ -194,7 +198,7 @@ public class UserDao {
                 "\tSET userEmergencyContactPhoneNum = '" + newEmergencyNum + "'\n" +
                 "\tWHERE userId = '" + id + "';";
 
-        try(Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
         } catch (SQLException error) {
@@ -209,7 +213,7 @@ public class UserDao {
                 "\tSET userRole = '" + newRole + "'\n" +
                 "\tWHERE userId = '" + id + "';";
 
-        try(Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
         } catch (SQLException error) {
@@ -219,15 +223,28 @@ public class UserDao {
 
     // Delete User
 
-    public void deleteUser(int id) {
-        String sql = "DELETE FROM users\n" +
-                "\tWHERE userId = '" + id + "';";
+    public boolean deleteUser(int id) {
+        // Added check if user exists, also added a parameterized query.
+        String checkSql = "SELECT COUNT(*) FROM users WHERE userId = ?";
 
-        try(Connection conn = DatabaseConnection.getConnection()) {
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.executeUpdate();
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            PreparedStatement checkStmt = conn.prepareStatement(checkSql);
+            checkStmt.setInt(1, id);
+            ResultSet rs = checkStmt.executeQuery();
+
+            if (rs.next() && rs.getInt(1) > 0) {
+                String deleteSql = "DELETE FROM users WHERE userId = ?";
+                PreparedStatement deleteStmt = conn.prepareStatement(deleteSql);
+                deleteStmt.setInt(1, id);
+                deleteStmt.executeUpdate();
+                return true;
+            } else {
+                // User doesn't exist
+                return false;
+            }
         } catch (SQLException error) {
             error.printStackTrace();
+            return false;
         }
     }
 }

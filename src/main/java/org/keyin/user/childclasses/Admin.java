@@ -6,7 +6,7 @@ public class Admin extends User {
 
     // Constructor
 
-    public Admin(int userId, String userName, String userPassword, String userEmail, String userPhoneNumber, String userAddress, String userEmergencyContactName, String userEmergencyContactPhoneNumber) {
-        super(userId, userName, userPassword, userEmail, userPhoneNumber, userAddress, "Admin", userEmergencyContactName, userEmergencyContactPhoneNumber);
+    public Admin(String userName, String userPassword, String userEmail, String userPhoneNumber, String userAddress, String userEmergencyContactName, String userEmergencyContactPhoneNumber) {
+        super(0, userName, userPassword, userEmail, userPhoneNumber, userAddress, "Admin", userEmergencyContactName, userEmergencyContactPhoneNumber);
     }
 }

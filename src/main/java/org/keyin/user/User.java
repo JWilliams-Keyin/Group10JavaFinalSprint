@@ -3,9 +3,9 @@ package org.keyin.user;
 import org.mindrot.jbcrypt.BCrypt;
 
 /* Author: Jack Williams
-*  Dates: April 2nd - April 3rd, 2025
-*  Description: The User class is the parent class for all kinds of users.
-*  There are three kinds of users: Member, Trainer, and Admin */
+ *  Dates: April 2nd - April 3rd, 2025
+ *  Description: The User class is the parent class for all kinds of users.
+ *  There are three kinds of users: Member, Trainer, and Admin */
 
 public class User {
 
@@ -24,9 +24,9 @@ public class User {
     // Constructors
 
     public User(int userId, String username, String password, String email, String phoneNumber, String address, String role, String emergencyContactName, String emergencyContactPhoneNumber) {
-        this.UserId = userId;
+        this.userId = userId;
         this.userName = username;
-        this.userPassword = BCrypt.hashpw(password, String.valueOf(10));
+        this.userPassword = password;// No hashing here, all done in UserService
         this.userEmail = email;
         this.userPhoneNumber = phoneNumber;
         this.userAddress = address;
@@ -40,13 +40,13 @@ public class User {
     public int getUserId() {
         return userId;
     }
-    
+
     public String getUserName() {
         return userName;
     }
 
     public String getUserPassword() {
-        return userPassword;
+        return userPassword; // No Hashing here either
     }
 
     public String getUserEmail() {
@@ -82,7 +82,7 @@ public class User {
     }
 
     public void setUserPassword(String userPassword) {
-        this.userPassword = BCrypt.hashpw(userPassword, String.valueOf(10));
+        this.userPassword = userPassword;
     }
 
     public void setUserEmail(String userEmail) {
@@ -115,12 +115,12 @@ public class User {
     public String toString() {
         return
                 "User: " + userName +
-                ", Password: " + userPassword +
-                ", Email: " + userEmail +
-                ", Phone Number: " + userPhoneNumber +
-                ", Address: " + userAddress +
-                ", Role: " + userRole +
-                ", Emergency Contact Name: " + userEmergencyContactName +
-                ", Emergency Contact Phone Number: " + userEmergencyContactPhoneNumber;
+                        ", Password: " + userPassword +
+                        ", Email: " + userEmail +
+                        ", Phone Number: " + userPhoneNumber +
+                        ", Address: " + userAddress +
+                        ", Role: " + userRole +
+                        ", Emergency Contact Name: " + userEmergencyContactName +
+                        ", Emergency Contact Phone Number: " + userEmergencyContactPhoneNumber;
     }
 }

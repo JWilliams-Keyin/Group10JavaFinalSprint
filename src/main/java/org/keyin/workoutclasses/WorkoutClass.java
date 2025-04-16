@@ -1,69 +1,71 @@
 package org.keyin.workoutclasses;
 
-/* Author: Jack Williams
-*  Dates: April 4th - April 6th, 2025
-*  Description: The WorkoutClass class is the class that sets gymClasses.
-*  gymClasses include a type, description, trainerId, and cost
-*/
+/*
+The workoutClass represents a classes that can be offered at the gym.
+Trainers can create, update and delete workout classes.
+Members can view and enroll in workout classes.
+ */
 public class WorkoutClass {
 
     // Attributes
-
-    private String gymClassType;
-    private String gymClassDescription;
-    private int trainerId;
-    private int gymClassCost;
+    private int workoutClassId;
+    private String workoutClassType;
+    private String workoutClassDescription;
+    private Integer trainerId;
 
     // Constructors
-
-    public WorkoutClass(String gymClassType, String gymClassDescription, int trainerId, int gymClassCost) {
-        this.gymClassType = gymClassType;
-        this.gymClassDescription = gymClassDescription;
+    public WorkoutClass(String workoutClassType, String workoutClassDescription, Integer trainerId) {
+        this.workoutClassType = workoutClassType;
+        this.workoutClassDescription = workoutClassDescription;
         this.trainerId = trainerId;
-        this.gymClassCost = 20;
+    }
+
+    public WorkoutClass(int workoutClassId, String workoutClassType, String workoutClassDescription, int trainerId) {
+        this.workoutClassId = workoutClassId;
+        this.workoutClassType = workoutClassType;
+        this.workoutClassDescription = workoutClassDescription;
+        this.trainerId = trainerId;
     }
 
     // Getters & Setters
-    
-    public String getGymClassType() {
-        return gymClassType;
+    public int getWorkoutClassId() {
+        return workoutClassId;
     }
 
-    public String getGymClassDescription() {
-        return gymClassDescription;
+    public void setWorkoutClassId(int workoutClassId) {
+        this.workoutClassId = workoutClassId;
     }
 
-    public int getTrainerId() {
+    public String getWorkoutClassType() {
+        return workoutClassType;
+    }
+
+    public void setWorkoutClassType(String workoutClassType) {
+        this.workoutClassType = workoutClassType;
+    }
+
+    public String getWorkoutClassDescription() {
+        return workoutClassDescription;
+    }
+
+    public void setWorkoutClassDescription(String workoutClassDescription) {
+        this.workoutClassDescription = workoutClassDescription;
+    }
+
+    public Integer getTrainerId() {
         return trainerId;
     }
 
-    public int getGymClassCost() {
-        return gymClassCost;
-    }
-
-    public void setGymClassType(String gymClassType) {
-        this.gymClassType = gymClassType;
-    }
-
-    public void setGymClassDescription(String gymClassDescription) {
-        this.gymClassDescription = gymClassDescription;
-    }
-
-    public void setTrainerId(int trainerId) {
+    public void setTrainerId(Integer trainerId) {
         this.trainerId = trainerId;
     }
 
-    public void setGymClassCost(int gymClassCost) {
-        this.gymClassCost = gymClassCost;
-    }
-
     // Methods
-
     @Override
     public String toString() {
-        return "Class Type: " + gymClassType +
-                ", Class Description: " + gymClassDescription +
-                ", Trainer ID: " + trainerId + 
-                ", Class Price: $" + gymClassCost;
+        return "Workout Class ID: " + workoutClassId +
+                ", Type: " + workoutClassType +
+                ", Description: " + workoutClassDescription +
+                ", Trainer ID: " + trainerId;
     }
 }
