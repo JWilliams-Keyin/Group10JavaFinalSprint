@@ -283,8 +283,10 @@ public class GymApp {
             System.out.println("2. Update a workout class");
             System.out.println("3. Delete a workout class");
             System.out.println("4. View my workout classes");
-            System.out.println("5. Purchase a membership");
-            System.out.println("6. Logout");
+            System.out.println("5. View my membership");
+            System.out.println("6. Purchase a membership");
+            System.out.println("7. View my total membership expenses");
+            System.out.println("8. Logout");
             System.out.print("Enter your choice: ");
 
             while (!scanner.hasNextInt()) {
@@ -315,16 +317,24 @@ public class GymApp {
                     workoutClassService.displayClassesByTrainerId(user.getUserId());
                     break;
                 case 5:
+                    // View membership
+                    viewMembershipDetails(user, membershipService);
+                    break;
+                case 6:
                     // Purchase a membership
                     purchaseMembership(scanner, user, membershipService);
                     break;
-                case 6:
+                case 7:
+                    // View total membership expenses
+                    viewMembershipExpenses(user, membershipService);
+                    break;
+                case 8:
                     System.out.println("Logging out...");
                     break;
                 default:
                     System.out.println("Invalid choice! Please select a valid option.");
             }
-        } while (choice != 6);
+        } while (choice != 8);
     }
 
     /*

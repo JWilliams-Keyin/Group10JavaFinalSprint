@@ -131,9 +131,6 @@ public class WorkoutClassService {
         return workoutClassDao.unenrollMemberFromClass(userId, classId);
     }
 
-    // Get Enrolled Members for a Class
-    public List<Integer> getEnrolledMembers(int classId) throws SQLException {
-        return workoutClassDao.getEnrolledMembers(classId);
-    }
+
 }
 

@@ -197,23 +197,6 @@ public class WorkoutClassDAO {
         }
     }
 
-    // Get Enrolled Members for a Class
-    public List<Integer> getEnrolledMembers(int classId) throws SQLException {
-        List<Integer> memberIds = new ArrayList<>();
-        String sql = "SELECT memberId FROM classEnrollments WHERE gymClassId = ?";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, classId);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    memberIds.add(rs.getInt("memberId"));
-                }
-            }
-        }
-
-        return memberIds;
-    }
 
     //Get all classes a user is enrolled
     public List<WorkoutClass> getClassesForMember(int userId) {
