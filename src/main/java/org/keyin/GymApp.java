@@ -458,10 +458,12 @@ public class GymApp {
             System.out.println("\n=== Member Menu ===");
             System.out.println("1. Browse workout classes");
             System.out.println("2. Enroll in a workout class");
-            System.out.println("3. View my membership");
-            System.out.println("4. Purchase a membership");
-            System.out.println("5. View my total membership expenses");
-            System.out.println("6. Logout");
+            System.out.println("3. View my enrolled workout classes");
+            System.out.println("4. Drop a workout class");
+            System.out.println("5. View my membership");
+            System.out.println("6. Purchase a membership");
+            System.out.println("7. View my total membership expenses");
+            System.out.println("8. Logout");
             System.out.print("Enter your choice: ");
 
             while (!scanner.hasNextInt()) {
@@ -483,24 +485,32 @@ public class GymApp {
                     enrollInClass(scanner, user, workoutClassService);
                     break;
                 case 3:
+                    // View all classes user is enrolled in
+                    viewEnrolledClasses(user, workoutClassService);
+                    break;
+                case 4:
+                    // View membership
+                    unenrollFromClass(scanner, user, workoutClassService);
+                    break;
+                case 5:
                     // View membership
                     viewMembershipDetails(user, membershipService);
                     break;
-                case 4:
+                case 6:
                     // Purchase membership
                     purchaseMembership(scanner, user, membershipService);
                     break;
-                case 5:
+                case 7:
                     // View total membership expenses
                     viewMembershipExpenses(user, membershipService);
                     break;
-                case 6:
+                case 8:
                     System.out.println("Logging out...");
                     break;
                 default:
                     System.out.println("Invalid choice! Please select a valid option.");
             }
-        } while (choice != 6);
+        } while (choice != 8);
     }
 
     /*
@@ -529,6 +539,51 @@ public class GymApp {
             }
         } catch (SQLException e) {
             System.out.println("Error enrolling in class: " + e.getMessage());
+        }
+    }
+
+    /*
+    View all workout classes a member is enrolled in
+    */
+    private static void viewEnrolledClasses(User user, WorkoutClassService workoutClassService) {
+        System.out.println("\n=== My Enrolled Workout Classes ===");
+
+        List<WorkoutClass> enrolledClasses = workoutClassService.getClassesForMember(user.getUserId());
+
+        if (enrolledClasses.isEmpty()) {
+            System.out.println("You are enrolled in no classes.");
+        } else {
+            for (WorkoutClass workoutClass : enrolledClasses) {
+                System.out.println(workoutClass);
+            }
+        }
+    }
+
+    private static void unenrollFromClass(Scanner scanner, User user, WorkoutClassService workoutClassService) throws SQLException {
+        System.out.println("\n=== Unenroll from Workout Class ===");
+
+        // Display currently enrolled classes
+        List<WorkoutClass> enrolledClasses = workoutClassService.getClassesForMember(user.getUserId());
+
+        if (enrolledClasses.isEmpty()) {
+            System.out.println("You are not enrolled in any classes.");
+            return;
+        }
+
+        for (WorkoutClass wc : enrolledClasses) {
+            System.out.println(wc);
+        }
+
+        System.out.print("Enter the ID of the class to drop: ");
+        int classId = scanner.nextInt();
+        scanner.nextLine();
+
+        boolean success = workoutClassService.unenrollMemberFromClass(user.getUserId(), classId);
+
+        if (success) {
+            System.out.println("Successfully dropped class.");
+        } else {
+            System.out.println("Drop class failed. Are you sure you're enrolled in that class?");
         }
     }
 

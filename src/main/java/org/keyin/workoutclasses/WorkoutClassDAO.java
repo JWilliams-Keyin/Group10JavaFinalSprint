@@ -214,4 +214,56 @@ public class WorkoutClassDAO {
 
         return memberIds;
     }
+
+    //Get all classes a user is enrolled
+    public List<WorkoutClass> getClassesForMember(int userId) {
+        List<WorkoutClass> classes = new ArrayList<>();
+        String sql = """
+        SELECT gc.*
+        FROM gymClasses gc
+        INNER JOIN classEnrollments ce ON gc.gymClassId = ce.gymClassId
+        WHERE ce.memberId = ?
+    """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                WorkoutClass workoutClass = new WorkoutClass(
+                        rs.getInt("gymClassId"),
+                        rs.getString("gymClassType"),
+                        rs.getString("gymClassDescription"),
+                        rs.getObject("trainerId", Integer.class) // ✅ handles null safely
+                );
+                classes.add(workoutClass);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error retrieving enrolled classes: " + e.getMessage());
+        }
+
+        return classes;
+    }
+    // User drops class
+    public boolean unenrollMemberFromClass(int userId, int classId) {
+        String sql = "DELETE FROM classEnrollments WHERE memberId = ? AND gymClassId = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            stmt.setInt(2, classId);
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Error unenrolling from class: " + e.getMessage());
+            return false;
+        }
+    }
+
 }

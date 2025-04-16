@@ -121,9 +121,19 @@ public class WorkoutClassService {
             return false;
         }
     }
+    // Get all classes a member is enrolled in
+    public List<WorkoutClass> getClassesForMember(int userId) {
+        return workoutClassDao.getClassesForMember(userId);
+    }
+
+    // User drops a class
+    public boolean unenrollMemberFromClass(int userId, int classId) {
+        return workoutClassDao.unenrollMemberFromClass(userId, classId);
+    }
 
     // Get Enrolled Members for a Class
     public List<Integer> getEnrolledMembers(int classId) throws SQLException {
         return workoutClassDao.getEnrolledMembers(classId);
     }
 }
+

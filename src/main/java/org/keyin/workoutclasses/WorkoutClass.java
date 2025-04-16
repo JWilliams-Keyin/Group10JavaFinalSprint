@@ -11,10 +11,10 @@ public class WorkoutClass {
     private int workoutClassId;
     private String workoutClassType;
     private String workoutClassDescription;
-    private int trainerId;
+    private Integer trainerId;
 
     // Constructors
-    public WorkoutClass(String workoutClassType, String workoutClassDescription, int trainerId) {
+    public WorkoutClass(String workoutClassType, String workoutClassDescription, Integer trainerId) {
         this.workoutClassType = workoutClassType;
         this.workoutClassDescription = workoutClassDescription;
         this.trainerId = trainerId;
@@ -52,11 +52,11 @@ public class WorkoutClass {
         this.workoutClassDescription = workoutClassDescription;
     }
 
-    public int getTrainerId() {
+    public Integer getTrainerId() {
         return trainerId;
     }
 
-    public void setTrainerId(int trainerId) {
+    public void setTrainerId(Integer trainerId) {
         this.trainerId = trainerId;
     }
 
